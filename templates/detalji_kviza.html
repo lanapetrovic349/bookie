@@ -1,0 +1,34 @@
+{% extends 'template.html' %}
+
+{% block content %}
+  <h3>Naziv kviza: {{ kviz.title }}</h3>
+  <h3>Opis: {{ kviz.description }}</h3>
+
+  <div id="termini">
+    {% if timovi %}
+      {% for tim in timovi %}
+          {% csrf_token %}
+          <ul style="border:1px solid #aaa; border-radius:8px; padding:10px; margin:10px 0; list-style-type:none;">
+            <li><strong>Ime tima:</strong> {{ tim.name }}</li>
+
+            <li><strong>Članovi:</strong>
+              {% if tim.memberships.all %}
+                {% for m in tim.memberships.all %}
+                  {{ m.user.username }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              {% else %}
+                (nema članova)
+              {% endif %}
+            </li>
+
+            <li>
+              <button type="submit">Prijavi se u tim</button>
+            </li>
+          </ul>
+ 
+      {% endfor %}
+    {% else %}
+      <p>Nema timova za ovaj kviz.</p>
+    {% endif %}
+  </div>
+{% endblock %}

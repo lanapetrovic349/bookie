@@ -1,0 +1,14 @@
+{% extends 'template.html' %}
+
+{% block content %}
+    <h2>Svi kvizovi</h2>
+
+    <li style="margin-bottom: 10px;">
+        <ul>
+            {% for kviz in kvizovi %}
+                <li><a href="{% url 'prikaziKviz' kviz.id %}">Naziv: {{ kviz.title }}  {{ kviz.description }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'template.html' %}
+
+{% block content %}
+  <h3>Top Kvizovi</h3>
+  <ul style="border:1px solid #aaa; border-radius:8px; padding:10px; list-style-type:none;">
+    {% for q in top_kvizovi %}
+      <li>{{ q.title }} – {{ q.count }}</li>
+    {% empty %}
+      <li>Nema kvizova ili nema učesnika.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

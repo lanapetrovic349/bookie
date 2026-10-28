@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Radionice</title>
+</head>
+<body>
+
+{% if request.user.is_authenticated %}
+    {% with m=request.user.memberships.all|first %}
+
+    {% if m %}
+    <nav>
+        <a>Svi kvizovi</a>
+        <a>Top kvizovi</a>
+        <a>Tim: {{ m.team.name }}</a>
+        <a>Ime: {{ request.user.username }}</a>
+        <a href="{% url 'logout1' %}">Odjavi se</a>
+    </nav>
+    {% else %}
+        <nav>
+        <a href="{% url 'svikvizovi' %}">Svi kvizovi</a>
+        <a href = {% url 'top' %}>Top kvizovi</a>
+        <a>Ime: {{ request.user.username }}</a>
+        <a href="{% url 'logout1' %}">Odjavi se</a>
+        </nav>
+    {% endif %}
+    {% endwith %}
+{% else %}
+<nav>
+    <a href="{% url 'login1' %}">Prijavi se</a>
+    <a href="{%  url 'register1' %}">Registruj se</a>
+</nav>
+{% endif %}
+
+{% block content %}
+
+{% endblock %}
+</body>
+</html>
